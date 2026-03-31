@@ -20,7 +20,7 @@ function Form() {
         Axios.post("http://localhost:3001/add", student)
         .then((res)=>{
             console.log(res);
-            navigate("/");
+            // navigate("/");
         })
         .catch((err)=>{
             console.error("Error fetching students:", err);

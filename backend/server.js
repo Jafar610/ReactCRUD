@@ -47,6 +47,48 @@ app.post("/add", (req, res)=>{
     )
 })
 
+app.delete("/delete/:id", (req, res)=>{
+    const {id} = req.params;
+   
+    connection.query("DELETE FROM students WHERE id = ?", [id], (err, results)=>{
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json({msg: "Student deleted successfully"});
+        }
+    })
+})
+
+
+app.put("/update/:id", (req, res)=>{
+    const {id} = req.params;
+    const {name, email, age} = req.body;
+    console.log(id);
+    connection.query("UPDATE students SET name = ?, email = ?, age = ? WHERE id = ?", [name, email, age, id], (err, results)=>{
+        if(err){
+            res.json({err: err});
+            console.log(err);
+        
+        }else{
+            res.json({msg: "Student updated successfully"});
+        }
+    })
+})
+
+app.get("/student/:id", (req, res)=>{
+    const {id} = req.params;
+    connection.query("SELECT * FROM students WHERE id = ?", [id], (err, results)=>{
+        if(err){
+            res.json({err: err});
+        }
+        else{
+            res.json(results);
+        }
+    })
+})
+
+
 
 
 
