@@ -1,46 +1,45 @@
 import {useState, useEffect} from 'react'
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { use } from 'react';
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
 function AddStudent() {
-  const [students, setStudents] = useState({
+  const navigate = useNavigate();
+  const [student, setStudent] = useState({
     name: '',
     email: '',
     age: ''
-  });
-const navigate = useNavigate();  
-  const changeHandler = (e)=>{
-    setStudents({
-      ...students,
+  })
+
+  const onchangeHandling = (e)=>{
+    setStudent({
+      ...student,
       [e.target.name]: e.target.value
-    });
+    })
   }
 
-  const submitHandler = (e)=>{
+  const submitHandling = (e) =>{
     e.preventDefault();
-    axios.post('http://localhost:3001/add', students)
+    axios.post("http://localhost:3002/add", student)
     .then((res)=>{
-      console.log(res);
+      console.log(res.data);
       navigate('/');
     })
     .catch((err)=>{
-      console.log(err);
+      console.error(err);
     })
   }
   return (
     <>
-        <h1>Add Student</h1>
-        <div>
-          <form action="">
-            <input type="text" name='name' placeholder='Name' onChange={changeHandler} />
-            <br />
-            <input type="email" name='email' placeholder='Email' onChange={changeHandler} />
-            <br />
-            <input type="number" name='age' placeholder='Age' onChange={changeHandler} />
-            <br />
-            <button onClick={submitHandler}>Add Student</button>
-          </form>
-        </div>
+      <h1>Add Students</h1>
+      <form onSubmit={submitHandling}>
+        <input type="text" name='name' placeholder='Name' onChange={onchangeHandling} />
+        <br />
+        <input type="email" name='email' placeholder='Email' onChange={onchangeHandling} />
+        <br />
+        <input type="number" name='age' placeholder='Age' onChange={onchangeHandling} />
+        <br />
+        <button type='submit'>Add Student</button>
+      </form>
     </>
   )
 }
