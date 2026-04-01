@@ -43,7 +43,8 @@ function Home() {
                     <td>{student.email}</td>
                     <td>{student.age}</td>
                     <td>
-                      <button>Edit</button>
+                      <button onClick={()=>navigate('/update/'+ student.id)}>Edit</button>
+                      &nbsp;
                       <button onClick={()=>deleteHandling(student.id)}>Delete</button>
                     </td>
                   </tr>

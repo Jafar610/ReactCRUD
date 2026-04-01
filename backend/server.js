@@ -41,6 +41,24 @@ app.delete('/delete/:id', (req, res)=>{
     })
 })
 
+app.put('/update/:id', (req, res)=>{
+    const {id} = req.params;
+    console.log(id);
+    const {name, email, age} = req.body;
+    connection.query('UPDATE students SET name = ?, email = ?, age = ? WHERE id = ?', [name, email, age, id], (err, results)=>{
+        if(err) throw err;
+        res.json({message: 'Student updated successfully'});
+    })
+})
+
+app.get('/:id', (req, res)=>{
+    const {id} = req.params;
+    connection.query('SELECT * FROM students WHERE id = ?', [id],(err, results)=>{
+        if(err) throw err;
+        res.json(results[0]);
+    })
+})
+
 
 
 
