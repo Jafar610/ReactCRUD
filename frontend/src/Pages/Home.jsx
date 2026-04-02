@@ -54,7 +54,6 @@ function Home() {
             }
           </tbody>
         </table>
-
         <div>
           <button onClick={()=>navigate('/add')}>Add Students</button>
         </div>

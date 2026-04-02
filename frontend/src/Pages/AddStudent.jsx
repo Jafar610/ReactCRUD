@@ -10,6 +10,8 @@ function AddStudent() {
     age: ''
   })
 
+  const[image, setImage] = useState(null);
+
   const onchangeHandling = (e)=>{
     setStudent({
       ...student,
@@ -38,6 +40,8 @@ function AddStudent() {
         <br />
         <input type="number" name='age' placeholder='Age' onChange={onchangeHandling} />
         <br />
+        <input type="file" name="image" id=""  onChange={(e)=>setImage(e.target.files[0])} />
+
         <button type='submit'>Add Student</button>
       </form>
     </>

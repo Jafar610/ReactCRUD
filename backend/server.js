@@ -1,16 +1,34 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
-
+const multer = require('multer');
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static('uplaods'));
+
 
 app.listen(3002, (err) =>{
     if(err) throw err;
     console.log('Server is running on ' + 'http://localhost:3002');
 })
+
+
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb)=>{
+        cb(null, 'uplaods/');
+    },
+    filename: (req, file, cb) =>{
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+})
+
+const uplaod = multer({storage})
+
+
+
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -44,9 +62,10 @@ app.delete('/delete/:id', (req, res) =>{
 
 
 
-app.post('/add', (req, res) =>{
+app.post('/add', uplaod.single("image"), (req, res) =>{
     const { name, email, age} = req.body;
-    connection.query('INSERT INTO students (name, email, age) VALUES (?, ?, ?)', [name, email, age], (err, results) =>{
+    const image = req.file.filename;
+    connection.query('INSERT INTO students (name, email, age, image) VALUES (?, ?, ?, ?)', [name, email, age, image], (err, results) =>{
         if(err) throw err;
         res.json({message: 'Student added successfully'});
     })
