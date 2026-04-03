@@ -48,6 +48,7 @@ function Home() {
                   <td>
                     <button onClick={()=>navigate(`/update/${student.id}`)}>Edit</button>
                     <button onClick={()=>deleteHandling(student.id)}>Delete</button>
+                    <button onClick={()=>navigate(`/view/${student.id}`) }>View</button>
                   </td>
                 </tr>
               ))

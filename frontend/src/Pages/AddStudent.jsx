@@ -10,18 +10,25 @@ function AddStudent() {
     age: ''
   })
 
-  const[image, setImage] = useState(null);
-
-  const onchangeHandling = (e)=>{
+  const onchangeHandling = (e) =>{
     setStudent({
       ...student,
       [e.target.name]: e.target.value
     })
   }
 
+  const[image, setImage] = useState(null);
+
+  const formData = new FormData();
+
+  formData.append("name", student.name);
+  formData.append("email", student.email);
+  formData.append("age", student.age);
+  formData.append("image", image);
+
   const submitHandling = (e) =>{
     e.preventDefault();
-    axios.post("http://localhost:3002/add", student)
+    axios.post("http://localhost:3002/add", formData)
     .then((res)=>{
       console.log(res.data);
       navigate('/');
