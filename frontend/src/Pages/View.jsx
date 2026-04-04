@@ -9,7 +9,7 @@ function View() {
     useEffect(()=>{
         axios.get(`http://localhost:3002/${id}`)
         .then((res)=>{
-            setStudent(res.data);
+            setStudent(res.data[0]);
             console.log(res.data);
         })
         .catch((err)=>{
@@ -21,9 +21,10 @@ function View() {
     <>
      <div>
         <h1>View Student</h1>
-        <div>
-            <img src={`http://localhost:3002/uploads/${student.image}`} alt="" />
+        <div >
+            <img src={`http://localhost:3002/uploads/${student.image}`} alt="" className='profile' />
             <h2>Name: {student.name}</h2>
+            <h2>Age: {student.age}</h2>
         </div>
      </div>
     </>

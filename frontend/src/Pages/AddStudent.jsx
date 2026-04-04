@@ -1,25 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function AddStudent() {
-  const navigate = useNavigate();
   const [student, setStudent] = useState({
     name: "",
     email: "",
     age: "",
   });
+  const navigate = useNavigate();
+
+  const [image, setImage] = useState(null);
 
   const onchangeHandling = (e) => {
-    const { name, value } = e.target;
+  const {name, value} = e.target;
 
     setStudent((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
-
-  const [image, setImage] = useState(null);
 
   const submitHandling = (e) => {
     e.preventDefault();
@@ -30,16 +30,12 @@ function AddStudent() {
     formData.append("age", student.age);
     formData.append("image", image);
 
-    axios
-      .post("http://localhost:3002/add", formData)
-      .then((res) => {
-        console.log(res.data);
-        navigate("/");
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    axios.post("http://localhost:3002/add", formData).then((res) => {
+      console.log(res.data);
+      navigate("/");
+    });
   };
+
   return (
     <>
       <h1>Add Students</h1>
