@@ -8,10 +8,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
-app.listen(3002, (err) => {
-  if (err) throw err;
-  console.log("Server is running on " + "http://localhost:3002");
-});
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -94,4 +91,14 @@ app.put("/update/:id", (req, res) => {
       res.json({ message: "Student updated successfully" });
     },
   );
+});
+
+
+
+
+
+
+app.listen(3002, (err) => {
+  if (err) throw err;
+  console.log("Server is running on " + "http://localhost:3002");
 });
