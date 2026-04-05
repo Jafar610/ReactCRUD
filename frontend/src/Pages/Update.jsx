@@ -12,6 +12,7 @@ function Update() {
 
   const [image, setImage] = useState(null);
 
+
   const id = useParams().id;
   const navigate = useNavigate();
 
@@ -27,7 +28,7 @@ function Update() {
     axios
       .get("http://localhost:3002/" + id)
       .then((res) => {
-        setStudent(res.data[0]);
+        setStudent(res.data);
         console.log(res.data);
       })
       .catch((err) => {
@@ -43,9 +44,11 @@ function Update() {
     formData.append("email", student.email);
     formData.append("age", student.age);
 
-    if (image) {
+    if(image){
       formData.append("image", image);
     }
+
+
     axios
       .put("http://localhost:3002/update/" + id, formData)
       .then((res) => {

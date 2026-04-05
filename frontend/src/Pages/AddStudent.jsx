@@ -8,9 +8,10 @@ function AddStudent() {
     email: "",
     age: "",
   });
-  const navigate = useNavigate();
 
-  const [image, setImage] = useState(null);
+  const[image, setImage] = useState(null);
+
+  const navigate = useNavigate();
 
   const onchangeHandling = (e) => {
   const {name, value} = e.target;
@@ -23,14 +24,14 @@ function AddStudent() {
 
   const submitHandling = (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("name", student.name);
     formData.append("email", student.email);
     formData.append("age", student.age);
     formData.append("image", image);
 
-    axios.post("http://localhost:3002/add", formData).then((res) => {
+    axios.post("http://localhost:3002/add", formData)
+    .then((res) => {
       console.log(res.data);
       navigate("/");
     });
