@@ -15,7 +15,7 @@ function View() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [id]);
   return (
     <>
       <div>

@@ -34,7 +34,7 @@ function Update() {
       .catch((err) => {
         console.log("There is an error" + err);
       });
-  }, []);
+  }, [id]);
 
   const submitHandling = (e) => {
     e.preventDefault();
